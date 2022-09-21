@@ -8,7 +8,7 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 public class SendMail {
 
-    public static void sendMail(String msg, String stock) {
+    public static void sendMail(String msg, String stock, String subject) {
         // Recipient's email ID needs to be mentioned.
         String to = "kumarmuna@hotmail.com";
         // Sender's email ID needs to be mentioned
@@ -45,7 +45,7 @@ public class SendMail {
             // Set To: header field of the header.
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             // Set Subject: header field
-            message.setSubject("This is "+stock+" Stock Alert.....");
+            message.setSubject(subject);
             // Now set the actual message
             message.setText(msg);
             System.out.println("sending...");

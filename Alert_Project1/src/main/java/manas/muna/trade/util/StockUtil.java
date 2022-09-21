@@ -59,6 +59,8 @@ public class StockUtil {
                 notificationData.put("stockName", stockName);
                 String msg = "Stock "+stockName+" is green last 3 days, Have a look once.";
                 notificationData.put("msg", msg);
+                String subject = "GREEN: This is "+stockName+" Stock Alert.....";
+                notificationData.put("subject", subject);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -80,6 +82,8 @@ public class StockUtil {
                 notificationData.put("stockName", stockName);
                 String msg = "Your Buy Stock "+stockName+"'s EMA is RED, Have a look once.";
                 notificationData.put("msg", msg);
+                String subject = "RED: This is "+stockName+" Stock Alert.....";
+                notificationData.put("subject", subject);
             }
         }catch (Exception e){
             e.printStackTrace();

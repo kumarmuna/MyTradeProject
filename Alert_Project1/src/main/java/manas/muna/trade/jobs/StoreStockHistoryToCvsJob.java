@@ -13,12 +13,22 @@ import java.util.Date;
 import java.util.Properties;
 
 public class StoreStockHistoryToCvsJob {
-    public static void main(String args[]) {
+//    public static void main(String args[]) {
+//
+////        https://query1.finance.yahoo.com/v7/finance/download/ITC.NS?period1=1629072000&period2=1663372800&interval=1d&events=history&includeAdjustedClose=true
+//
+//        clearHistoryFolder();
+//        for (String stockName : StockUtil.loadStockNames()) {
+//            System.out.println("Loading for.... "+stockName);
+//            loadStockHistoryExcel(stockName);
+//        }
+//    }
 
-//        https://query1.finance.yahoo.com/v7/finance/download/ITC.NS?period1=1629072000&period2=1663372800&interval=1d&events=history&includeAdjustedClose=true
-
+    public static void execute() throws Exception{
         clearHistoryFolder();
+        Thread.sleep(1000);
         for (String stockName : StockUtil.loadStockNames()) {
+            System.out.println("Loading for.... "+stockName);
             loadStockHistoryExcel(stockName);
         }
     }
@@ -41,7 +51,7 @@ public class StoreStockHistoryToCvsJob {
         url.append("period1="+getEndtTime());
         url.append("&period2="+getStartTime());
         url.append("&interval=1d&events=history&includeAdjustedClose=true");
-        System.out.println("URL = "+url);
+//        System.out.println("URL = "+url);
 //        URL url1 = null;
         try (BufferedInputStream in = new BufferedInputStream(new URL(url.toString()).openStream());
              FileOutputStream fileOutputStream = new FileOutputStream("D:\\share-market\\history_data\\"+stockName+".csv")) {

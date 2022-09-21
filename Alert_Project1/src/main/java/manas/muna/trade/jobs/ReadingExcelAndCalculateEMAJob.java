@@ -14,9 +14,17 @@ import java.util.List;
 import java.util.Map;
 
 public class ReadingExcelAndCalculateEMAJob {
-    public static void main(String args[]) {
+//    public static void main(String args[]) {
+//        for (String stockName : StockUtil.loadStockNames()) {
+//            System.out.print("Loading for.... "+stockName);
+//            Map<String, Double> todaysEMA = readCVSData("D:\\share-market\\history_data\\"+stockName+".csv", 51.83, 51.90);
+//            storeTodaysEma("D:\\share-market\\history_ema_data\\"+stockName+".csv", todaysEMA);
+//        }
+//    }
 
+    public static void execute() {
         for (String stockName : StockUtil.loadStockNames()) {
+            System.out.print("Loading for.... "+stockName);
             Map<String, Double> todaysEMA = readCVSData("D:\\share-market\\history_data\\"+stockName+".csv", 51.83, 51.90);
             storeTodaysEma("D:\\share-market\\history_ema_data\\"+stockName+".csv", todaysEMA);
         }
@@ -36,7 +44,7 @@ public class ReadingExcelAndCalculateEMAJob {
 
             CSVReader csvReader = new CSVReaderBuilder(filereader).withSkipLines(1).build();
             List<String[]> allData = csvReader.readAll();
-            FileWriter outputfile = new FileWriter(file, true);
+            FileWriter outputfile = new FileWriter(file, false);
             CSVWriter writer = new CSVWriter(outputfile);
 
             String[] data = {Double.toString(ema30), Double.toString(ema9)};
