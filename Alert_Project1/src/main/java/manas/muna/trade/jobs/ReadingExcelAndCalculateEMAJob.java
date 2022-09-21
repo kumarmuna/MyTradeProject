@@ -8,6 +8,8 @@ import manas.muna.trade.util.StockUtil;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -24,9 +26,12 @@ public class ReadingExcelAndCalculateEMAJob {
 
     public static void execute() {
         for (String stockName : StockUtil.loadStockNames()) {
-            System.out.print("Loading for.... "+stockName);
-            Map<String, Double> todaysEMA = readCVSData("D:\\share-market\\history_data\\"+stockName+".csv", 51.83, 51.90);
-            storeTodaysEma("D:\\share-market\\history_ema_data\\"+stockName+".csv", todaysEMA);
+            System.out.println("Loading for.... "+stockName);
+            Path path = Paths.get(".\\src\\main\\resources\\history_data\\"+stockName+".csv");
+            Path path1 = Paths.get(".\\src\\main\\resources\\history_ema_data\\"+stockName+".csv");
+            Map<String, Double> yesterdayEMA = StockUtil.readPreviousDayEma(path1.toString());
+            Map<String, Double> todaysEMA = readCVSData(path.toString(), yesterdayEMA.get("EMA30"), yesterdayEMA.get("EMA9"));
+            storeTodaysEma(path1.toString(), todaysEMA);
         }
     }
 

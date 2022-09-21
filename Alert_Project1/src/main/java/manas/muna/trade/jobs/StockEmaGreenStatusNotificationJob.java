@@ -6,6 +6,8 @@ import manas.muna.trade.util.SendMail;
 import manas.muna.trade.util.StockUtil;
 
 import java.io.FileReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +23,9 @@ public class StockEmaGreenStatusNotificationJob {
 
     public static void execute() {
         for (String stockName : StockUtil.loadStockNames()) {
-            String stockEmaDataLoad = "D:\\share-market\\history_ema_data\\"+stockName+".csv";
-            Map<String, String> notificationData = StockUtil.readEmaData(stockEmaDataLoad, stockName);
+//            String stockEmaDataLoad = "D:\\share-market\\history_ema_data\\"+stockName+".csv";
+            Path path = Paths.get(".\\src\\main\\resources\\history_ema_data\\"+stockName+".csv");
+            Map<String, String> notificationData = StockUtil.readEmaData(path.toString(), stockName);
             verifyAndSenfNotification(notificationData);
         }
     }

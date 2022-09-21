@@ -5,6 +5,8 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -35,8 +37,9 @@ public class StoreStockHistoryToCvsJob {
 
     private static void clearHistoryFolder() {
         try {
-            File file = new File("D:\\share-market\\history_data");
-            FileUtils.cleanDirectory(file);
+            //File file = new File("D:\\share-market\\history_data");
+            Path path = Paths.get(".\\src\\main\\resources\\history_data");
+            FileUtils.cleanDirectory(path.toFile());
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -51,10 +54,13 @@ public class StoreStockHistoryToCvsJob {
         url.append("period1="+getEndtTime());
         url.append("&period2="+getStartTime());
         url.append("&interval=1d&events=history&includeAdjustedClose=true");
+        Path path = Paths.get(".\\src\\main\\resources\\history_data\\"+stockName+".csv");
 //        System.out.println("URL = "+url);
 //        URL url1 = null;
+//        try (BufferedInputStream in = new BufferedInputStream(new URL(url.toString()).openStream());
+//             FileOutputStream fileOutputStream = new FileOutputStream("D:\\share-market\\history_data\\"+stockName+".csv")) {
         try (BufferedInputStream in = new BufferedInputStream(new URL(url.toString()).openStream());
-             FileOutputStream fileOutputStream = new FileOutputStream("D:\\share-market\\history_data\\"+stockName+".csv")) {
+             FileOutputStream fileOutputStream = new FileOutputStream(path.toFile())) {
             byte dataBuffer[] = new byte[1024];
             int bytesRead;
             while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
