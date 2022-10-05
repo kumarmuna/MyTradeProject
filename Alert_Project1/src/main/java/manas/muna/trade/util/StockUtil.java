@@ -17,7 +17,7 @@ public class StockUtil {
     public static String[] loadStockNames() {
         Properties p = new Properties();
         try {
-            Path path = Paths.get(".\\src\\main\\resources\\stock.properties");
+            Path path = Paths.get("D:\\share-market\\Alert_Project1\\src\\main\\resources\\stock.properties");
             FileReader reader = new FileReader(path.toString());
             p.load(reader);
             p.getProperty("stock_list");
@@ -30,7 +30,7 @@ public class StockUtil {
     public static String[] loadBuyStockNames() {
         Properties p = new Properties();
         try {
-            Path path = Paths.get(".\\src\\main\\resources\\buy-stock.properties");
+            Path path = Paths.get("D:\\share-market\\Alert_Project1\\src\\main\\resources\\buy-stock.properties");
             FileReader reader = new FileReader(path.toString());
             p.load(reader);
             p.getProperty("stock_list");

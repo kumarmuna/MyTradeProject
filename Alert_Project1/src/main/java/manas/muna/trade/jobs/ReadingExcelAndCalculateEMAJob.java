@@ -25,14 +25,16 @@ public class ReadingExcelAndCalculateEMAJob {
 //    }
 
     public static void execute() {
+        System.out.println("ReadingExcelAndCalculateEMAJob started.......");
         for (String stockName : StockUtil.loadStockNames()) {
             System.out.println("Loading for.... "+stockName);
-            Path path = Paths.get(".\\src\\main\\resources\\history_data\\"+stockName+".csv");
-            Path path1 = Paths.get(".\\src\\main\\resources\\history_ema_data\\"+stockName+".csv");
+            Path path = Paths.get("D:\\share-market\\Alert_Project1\\src\\main\\resources\\history_data\\"+stockName+".csv");
+            Path path1 = Paths.get("D:\\share-market\\Alert_Project1\\src\\main\\resources\\history_ema_data\\"+stockName+".csv");
             Map<String, Double> yesterdayEMA = StockUtil.readPreviousDayEma(path1.toString());
             Map<String, Double> todaysEMA = readCVSData(path.toString(), yesterdayEMA.get("EMA30"), yesterdayEMA.get("EMA9"));
             storeTodaysEma(path1.toString(), todaysEMA);
         }
+        System.out.println("ReadingExcelAndCalculateEMAJob end.......");
     }
 
     private static void storeTodaysEma(String filePath, Map<String, Double> todaysEMA) {

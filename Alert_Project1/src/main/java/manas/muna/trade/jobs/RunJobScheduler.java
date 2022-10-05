@@ -12,18 +12,18 @@ public class RunJobScheduler extends TimerTask {
     }
 
     public static void main(String[] args) throws Exception{
-
-        Date date5pm = new java.util.Date();
-        date5pm.setHours(17);
+        int dateTime = 16;
+        Date date5pm = new Date();
+        date5pm.setHours(dateTime);
         date5pm.setMinutes(0);
         Date date6pm = date5pm;
-        date6pm.setHours(18);
+        date6pm.setHours(dateTime+1);
         date6pm.setMinutes(0);
         Date date7pm = date5pm;
-        date7pm.setHours(19);
+        date7pm.setHours(dateTime+2);
         date7pm.setMinutes(0);
         Date date7_3pm = date5pm;
-        date7_3pm.setHours(19);
+        date7_3pm.setHours(dateTime+2);
         date7_3pm.setMinutes(30);
         Timer timer = new Timer(); // Instantiating a timer object
 
